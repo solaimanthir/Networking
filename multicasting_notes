@@ -1,0 +1,38 @@
+why multicasting ?
+	* without multicasting, source has to construct and send packet to each destination.
+	* with Multicasting, source will send data to a common multicast group.
+	  Multicasting saves bandwidth because there is no multiple copies from sourcefor each destination.
+	  And destination is only one multicast IP address.
+	* Multicast IP range 224.0.0.0 to 239.255.255.255(class D address). Sender does not need to be part of multicast group.
+	  Range of addresses between 224.0.0.0 to 224.0.0.255 is for use of routing protocols and other low-level topology discovery.
+	  For discovery or maintenance protocols, scope is only for the link.
+	  Multicast routers should not forward any multicast datagram with destination addresses in this range.
+
+brief details about Multicast routing protocols:
+	* PIM is the protocol to build necessary routing paths for receivers to get data from multicast group.
+	* PIM builds routing table called MROUTE.
+	* goal is to build path to reach all members of the group.
+	* Routing protocol takes two approaches: source based tree(PIM-dense mode), core-based tree(PIM-Sparse mode).
+	* source based tree:
+		* Builds only shortest path tree for each sender.
+		* Tree is built from receiver to the sender.
+		servers will be flooding multicast signals. If the routers doesn't have receivers, pruning message will be sent by the
+		received router.
+		flooding and pruning occurs continuously. Not a recommended design.
+	* core-based tree:
+		* Builds a single distribution tree that is shared by all senders.
+		* Selects one router as a core.
+		No need to flood as senders register to the core only and receivers request to the core only for service.
+		All other routers has to be configured with who is the core(rendezvous point).
+	* PIM alternative: MOSPF. The caveat is that we need to run OSPF on all routers.
+
+what is IGMP and how IGMP Protocol operates ?
+	* IGMP is the protocol for joining Multicast communication.
+	* IGMP is used by Multicast routers to keep track of membership in a multicast group. 
+	* It operates on a single ethernet segment. RFC 1112.
+	operation:
+		* A host sends an IGMP report when it joins a multicast group.
+		* A multicast router regularly multicasts an IGMP query to all hosts.
+		* A host responds to an igmp query with an IGMP report.
+		Query can be general or group-specific.
+	*In networks with multiple Multicast routers, only one acts as querier and other routers as forwarder.
