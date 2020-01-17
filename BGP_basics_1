@@ -1,0 +1,35 @@
+* BGP(Border Gateway Protocol) is an open standard protocol and it is the routing protocol 
+  which is used to route traffic across the internet.
+
+* It is quite different from IGPs(Interior Gateway Protocol) such as OSPF, EIGRP, RIP.
+
+* AS(Autonomous System) - A group of routers under a common policy and a single administration.
+  when we enable BGP between two AS, it is said to be eBGP.
+  And, when we enable BGP between routers within an AS, it is said to be iBGP.
+
+* IGP protocols such as EIGRP, OSPF runs on top of IP. Protocol RIP runs on top of UDP.
+  BGP works on top of TCP. 
+
+* BGP packet types are OPEN(sets up adjacency), UPDATE(Advertises routes), NOTIFICATION(send an error
+to BGP neighbor), KEEPALIVE.
+
+* KEEPALIVE messages are sent every 60s. 180s is the dead timer value.
+
+* BGP uses attributes as the metric.
+  IGP protocols such as OSPF uses link cost as the metric, RIP uses hop count as the metric.
+  For EIGRP, bandwidth and delay is the metric.
+
+* BGP uses collection of attributes for metric. BGP has a total of 13-14 attributes.
+
+* For iBGP, the adminitrative distance is 200. For eBGP, it is 20 only.
+  This denotes that BGP is good between AS but not within the AS.
+
+* iBGP neighbors need not be directly connected.
+  When the iBGP neighbors send BGP packets, they send with TTL of 255.
+  eBGP neighbors send BGP packets with TTL of 1(reason: for security purposes).
+
+* Any bgp packet coming from addresses other than the configured neighbor(s) will be ignored.
+
+* BGP is a slow protocol (needed so that it will not flood the internet with routing updates).
+
+* BGP States: IDLE, CONNECT, ACTIVE, OPEN SENT, OPEN CONFIRM, ESTABLISHED.
