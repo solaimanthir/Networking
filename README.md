@@ -1,2 +1,2 @@
 # Networking
-This repository contains notes from my study on Networking concepts.
+This repository is about Networking technologies, protocols etc.
